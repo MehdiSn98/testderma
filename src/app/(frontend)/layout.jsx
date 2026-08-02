@@ -41,18 +41,18 @@ export default function RootLayout({ children }) {
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
             
-            <Link href="/" className="flex flex-col justify-center">
-              <span className="text-[13px] sm:text-lg font-bold text-teal-700 leading-none">دکتر متخصص پوست و مو</span>
+            <Link href="/" className="flex flex-col justify-center group">
+              <span className="text-[13px] sm:text-lg font-bold text-teal-700 leading-none group-hover:text-teal-800 transition-colors">دکتر متخصص پوست و مو</span>
               <span className="text-[9px] sm:text-xs text-slate-500 font-medium leading-tight mt-1">مطب تخصصی زیبایی و لیزر</span>
             </Link>
 
             {/* دکمه منوی همبرگری */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="min-[907px]:hidden p-1.5 text-slate-600 hover:text-teal-600 rounded-lg focus:outline-none transition-colors"
+              className="min-[907px]:hidden p-1.5 text-slate-600 hover:text-teal-600 hover:bg-teal-50 rounded-lg focus:outline-none transition-all duration-200 active:scale-90"
               aria-label="منو"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -61,8 +61,8 @@ export default function RootLayout({ children }) {
               </svg>
             </button>
 
-            {/* منوی دسکتاپ */}
-            <nav className="hidden min-[907px]:flex items-center gap-2 lg:gap-3 font-medium text-sm lg:text-base">
+            {/* منوی دسکتاپ با انیمیشن هوور و خط زیرین */}
+            <nav className="hidden min-[907px]:flex items-center gap-1 lg:gap-2 font-medium text-sm lg:text-base">
               {navLinks.map((link) => {
                 const active = isLinkActive(link.href)
                 return (
@@ -70,34 +70,41 @@ export default function RootLayout({ children }) {
                     key={link.href}
                     href={link.href}
                     onClick={() => setActiveHash(link.href.startsWith('#') ? link.href : '')}
-                    className={`px-3 py-1.5 rounded-xl transition-all duration-200 ${
+                    className={`relative px-3 py-2 rounded-xl transition-all duration-300 group overflow-hidden ${
                       active
-                        ? 'text-teal-600 font-bold bg-teal-50/80 shadow-sm'
+                        ? 'text-teal-700 font-bold bg-teal-50/80 shadow-sm'
                         : 'text-slate-600 hover:text-teal-600 hover:bg-slate-50'
                     }`}
                   >
-                    {link.name}
+                    <span className="relative z-10">{link.name}</span>
+                    
+                    {/* خط انیمیشنی زیر لینک */}
+                    <span className={`absolute bottom-0 right-0 h-0.5 bg-teal-600 transition-all duration-300 ${
+                      active ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`} />
                   </a>
                 )
               })}
             </nav>
 
-            {/* دکمه مشاوره دسکتاپ */}
+            {/* دکمه مشاوره دسکتاپ (کاملاً بدون فلش) */}
             <a 
               href="#consultation" 
-              className="hidden min-[907px]:inline-flex bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-full font-medium text-sm transition-all shadow-md shadow-teal-600/20 active:scale-95"
+              className="hidden min-[907px]:inline-flex relative group overflow-hidden bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 shadow-md shadow-teal-600/20 hover:shadow-lg hover:shadow-teal-600/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
             >
-              درخواست مشاوره
+              <span className="relative z-10">ثبت نوبت اینترنتی</span>
+              {/* افکت شاین/درخشش روی دکمه */}
+              <span className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
             </a>
           </div>
 
-          {/* منوی کشویی موبایل */}
+          {/* منوی کشویی موبایل (کاملاً وسط‌چین شده و بدون فلش) */}
           <div
             className={`min-[907px]:hidden overflow-hidden transition-all duration-300 ease-in-out grid ${
               isMenuOpen ? 'grid-rows-[1fr] opacity-100 border-b border-slate-100' : 'grid-rows-[0fr] opacity-0'
             }`}
           >
-            <div className="min-h-0 bg-white px-4 pt-2 pb-6 space-y-2">
+            <div className="min-h-0 bg-white px-6 pt-3 pb-6 space-y-2 text-center">
               {navLinks.map((link) => {
                 const active = isLinkActive(link.href)
                 return (
@@ -108,22 +115,25 @@ export default function RootLayout({ children }) {
                       setIsMenuOpen(false)
                       setActiveHash(link.href.startsWith('#') ? link.href : '')
                     }}
-                    className={`block py-2.5 px-3 rounded-xl font-medium text-sm transition-all duration-200 ${
+                    className={`block py-3 px-4 rounded-xl font-medium text-sm transition-all duration-200 text-center mx-auto ${
                       active
-                        ? 'text-teal-700 font-bold bg-teal-50'
-                        : 'text-slate-700 hover:text-teal-600 hover:bg-slate-50'
+                        ? 'text-teal-700 font-bold bg-teal-50 scale-[1.02]'
+                        : 'text-slate-700 hover:text-teal-600 hover:bg-slate-50 hover:scale-[1.01]'
                     }`}
                   >
                     {link.name}
                   </a>
                 )
               })}
+              
+              {/* دکمه مشاوره منوی موبایل (بدون فلش) */}
               <a 
                 href="#consultation" 
                 onClick={() => setIsMenuOpen(false)} 
-                className="block text-center bg-teal-600 text-white py-2.5 rounded-xl font-medium text-sm mt-4 shadow-md shadow-teal-600/20 active:scale-95 transition-transform"
+                className="relative overflow-hidden block text-center bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-medium text-sm mt-4 shadow-md shadow-teal-600/20 active:scale-95 transition-all duration-200 group"
               >
-                ثبت درخواست مشاوره
+                <span className="relative z-10">ثبت درخواست مشاوره</span>
+                <span className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
               </a>
             </div>
           </div>
@@ -132,10 +142,10 @@ export default function RootLayout({ children }) {
         {/* بدنه اصلی */}
         <main className="flex-grow w-full relative">{children}</main>
 
-       {/* فوتر با گرادینت از سبز زمردی (بالا) به سورمه‌ای تیره (پایین) */}
+        {/* فوتر با گرادینت زمردی به سورمه‌ای و انیمیشن لینک‌ها */}
         <footer className="bg-gradient-to-b from-teal-800 via-slate-900 to-[#0b1320] text-slate-300 pt-12 pb-8 px-4 border-t border-teal-700/30 m-0 relative overflow-hidden">
           
-          {/* نورهای پس‌زمینه ملایم برای ترکیب بهتر رنگ‌ها */}
+          {/* نورهای پس‌زمینه ملایم */}
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -144,7 +154,7 @@ export default function RootLayout({ children }) {
             {/* ستون ۱: معرفی کوتاه مطب */}
             <div className="flex flex-col items-center md:items-start">
               <h3 className="text-white text-lg font-bold mb-3 flex items-center gap-2 justify-center md:justify-start">
-                <span>🩺</span> مطب تخصصی پوست و مو
+                <span className="animate-bounce">🩺</span> مطب تخصصی پوست و مو
               </h3>
               <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed mb-4 max-w-sm md:max-w-none">
                 ارائه جدیدترین خدمات درمانی و زیبایی پوست، مو و لیزر با بهره‌گیری از پیشرفته‌ترین تجهیزات روز دنیا و کادر مجرب.
@@ -156,7 +166,7 @@ export default function RootLayout({ children }) {
                   href="https://instagram.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-pink-600 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-white/10 backdrop-blur-md"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-pink-600 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-pink-600/30 border border-white/10 backdrop-blur-md hover:scale-110 active:scale-95"
                   aria-label="اینستاگرام"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -167,7 +177,7 @@ export default function RootLayout({ children }) {
                   href="https://wa.me/989120000000" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-emerald-600 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-white/10 backdrop-blur-md"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-emerald-600 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-emerald-600/30 border border-white/10 backdrop-blur-md hover:scale-110 active:scale-95"
                   aria-label="واتس‌اپ"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -178,7 +188,7 @@ export default function RootLayout({ children }) {
                   href="https://t.me" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-sky-500 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-white/10 backdrop-blur-md"
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-sky-500 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-sky-500/30 border border-white/10 backdrop-blur-md hover:scale-110 active:scale-95"
                   aria-label="تلگرام"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -188,14 +198,30 @@ export default function RootLayout({ children }) {
               </div>
             </div>
 
-            {/* ستون ۲: دسترسی سریع */}
+            {/* ستون ۲: دسترسی سریع (بدون علامت ←) */}
             <div className="md:pr-8">
               <h4 className="text-white text-base font-bold mb-3">دسترسی سریع</h4>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-300/80">
-                <li><a href="#services" className="hover:text-teal-300 transition-colors">خدمات زیبایی و درمانی</a></li>
-                <li><a href="#gallery" className="hover:text-teal-300 transition-colors">گالری</a></li>
-                <li><a href="#articles" className="hover:text-teal-300 transition-colors">مقالات و آموزش‌ها</a></li>
-                <li><a href="#consultation" className="hover:text-teal-300 transition-colors">درخواست مشاوره</a></li>
+              <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300/80">
+                <li>
+                  <a href="#services" className="inline-block hover:text-teal-300 transition-all duration-300 hover:-translate-x-1.5">
+                    خدمات زیبایی و درمانی
+                  </a>
+                </li>
+                <li>
+                  <a href="#gallery" className="inline-block hover:text-teal-300 transition-all duration-300 hover:-translate-x-1.5">
+                    گالری
+                  </a>
+                </li>
+                <li>
+                  <a href="#articles" className="inline-block hover:text-teal-300 transition-all duration-300 hover:-translate-x-1.5">
+                    مقالات و آموزش‌ها
+                  </a>
+                </li>
+                <li>
+                  <a href="#consultation" className="inline-block hover:text-teal-300 transition-all duration-300 hover:-translate-x-1.5">
+                    درخواست مشاوره
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -203,16 +229,16 @@ export default function RootLayout({ children }) {
             <div className="flex flex-col items-center md:items-start">
               <h4 className="text-white text-base font-bold mb-3">ارتباط با مطب</h4>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300/80 text-center md:text-right">
-                <li className="flex items-center justify-center md:justify-start gap-2">
-                  <span className="text-teal-300 shrink-0">📍</span>
+                <li className="flex items-center justify-center md:justify-start gap-2 group">
+                  <span className="text-teal-300 shrink-0 group-hover:scale-125 transition-transform">📍</span>
                   <span>آبادان - خیابان امیری - خیابان پرویزی - مجتمع دهکده سلامت - طبقه اول</span>
                 </li>
-                <li className="flex items-center justify-center md:justify-start gap-2">
-                  <span className="text-teal-300 shrink-0">📞</span>
-                  <a href="tel:06153230035" className="hover:text-teal-300 font-mono text-sm">061-53230035</a>
+                <li className="flex items-center justify-center md:justify-start gap-2 group">
+                  <span className="text-teal-300 shrink-0 group-hover:scale-125 transition-transform">📞</span>
+                  <a href="tel:06153230035" className="hover:text-teal-300 font-mono text-sm transition-colors">061-53230035</a>
                 </li>
-                <li className="flex items-center justify-center md:justify-start gap-2">
-                  <span className="text-teal-300 shrink-0">🕒</span>
+                <li className="flex items-center justify-center md:justify-start gap-2 group">
+                  <span className="text-teal-300 shrink-0 group-hover:scale-125 transition-transform">🕒</span>
                   <span>شنبه تا پنجشنبه: ۱۵:۰۰ الی ۲۰:۰۰</span>
                 </li>
               </ul>
@@ -225,7 +251,6 @@ export default function RootLayout({ children }) {
             <p>© {new Date().getFullYear()} تمامی حقوق مادی و معنوی این وب‌سایت متعلق به مطب تخصصی پوست و مو می‌باشد.</p>
           </div>
         </footer>
-
 
       </body>
     </html>

@@ -27,11 +27,11 @@ export default function CallToAction() {
           </div>
         </div>
 
-        {/* دکمه شماره تلفن */}
+        {/* دکمه شماره تلفن با انیمیشن هوور ساده و شیک */}
         <div className="z-10 shrink-0">
           <a 
             href="tel:06153230035"
-            className="inline-block text-center font-mono text-sm min-[490px]:text-lg sm:text-2xl font-bold tracking-wider bg-white/10 hover:bg-white/20 border border-white/20 px-3 min-[490px]:px-5 sm:px-6 py-2 min-[490px]:py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all dir-ltr"
+            className="inline-block text-center font-mono text-sm min-[490px]:text-lg sm:text-2xl font-bold tracking-wider bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 px-3 min-[490px]:px-5 sm:px-6 py-2 min-[490px]:py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 active:scale-95 dir-ltr"
           >
             061-53230035
           </a>

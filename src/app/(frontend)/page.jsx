@@ -4,23 +4,28 @@ import HeroSlider from '@/components/HeroSlider'
 import CallToAction from '@/components/CallToAction'
 import FeaturesGrid from '@/components/FeaturesGrid'
 import AboutSection from '@/components/AboutSection'
+import MedicalBackground from '@/components/MedicalBackground'
 
 export default function HomePage() {
   return (
-    <div className="space-y-3 sm:space-y-12 pb-12">
+    // تمام marginها و paddingهای اضافه حذف شدند تا بک‌گراند چسبیده به هدر و فوتر باشه
+    <div className="relative w-full overflow-hidden space-y-3 sm:space-y-12 m-0 p-0">
       
+      {/* بکگراند لبه به لبه کل ارتفاع و عرض رو کاور می‌کنه */}
+      <MedicalBackground />
+
       {/* ۱. اسلایدر اصلی */}
-      <div className="mx-auto mt-5">
+      <div className="mx-auto pt-10">
         <HeroSlider />
       </div>
 
-      {/*سکشن رزرو و تماس   */}
-        <CallToAction />
+      {/* ۲. سکشن رزرو و تماس */}
+      <CallToAction />
       
-      {/* ۲. سکشن ویژگی‌های کلینیک */}
+      {/* ۳. سکشن ویژگی‌های کلینیک */}
       <FeaturesGrid />
 
-      {/* ۳. سکشن معرفی پزشک و آمار */}
+      {/* ۴. سکشن معرفی پزشک و آمار */}
       <AboutSection />
 
     </div>

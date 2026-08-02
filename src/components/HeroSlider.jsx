@@ -8,16 +8,31 @@ export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
+  const timerRef = useRef(null) 
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev === servicesSlides.length - 1 ? 0 : prev + 1))
     }, 5000)
-    return () => clearInterval(timer)
+  }
+
+  useEffect(() => {
+    resetTimer()
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [])
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev === servicesSlides.length - 1 ? 0 : prev + 1))
-  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? servicesSlides.length - 1 : prev - 1))
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === servicesSlides.length - 1 ? 0 : prev + 1))
+    resetTimer()
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? servicesSlides.length - 1 : prev - 1))
+    resetTimer()
+  }
 
   const handleTouchStart = (e) => { touchStartX.current = e.targetTouches[0].clientX }
   const handleTouchMove = (e) => { touchEndX.current = e.targetTouches[0].clientX }
@@ -49,12 +64,13 @@ export default function HeroSlider() {
               className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-7000 ease-linear"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-slate-950/40 md:bg-gradient-to-l md:from-slate-950/30 md:via-slate-950/80 md:to-slate-950" />
+              {/* گرادینت تیره ۲۰٪ روشن‌تر شد */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/50 to-slate-950/20 md:bg-gradient-to-l md:from-slate-950/20 md:via-slate-950/60 md:to-slate-950/85" />
             </div>
 
             <div className="relative z-20 h-full p-6 pb-12 sm:p-10 sm:pb-16 md:p-12 md:pb-20 pr-8 sm:pr-14 md:pr-20 flex flex-col justify-end md:justify-center text-right">
               <div className="max-w-xl">
-                <span className="inline-block bg-teal-500/30 text-teal-200 text-xs font-semibold px-3.5 py-1 rounded-full border border-teal-500/40 mb-3 backdrop-blur-md shadow-sm">
+                <span className="inline-block bg-teal-500/40 text-teal-100 text-xs font-semibold px-3.5 py-1 rounded-full border border-teal-400/50 mb-3 backdrop-blur-md shadow-sm">
                   {slide.badge}
                 </span>
                 <h1 className="text-2xl sm:text-4xl font-bold text-white leading-tight mb-3 drop-shadow-md">
@@ -103,7 +119,10 @@ export default function HeroSlider() {
           {servicesSlides.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => {
+                setCurrentSlide(index)
+                resetTimer() 
+              }}
               aria-label={`برو به اسلاید ${index + 1}`}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentSlide ? 'w-6 bg-teal-400' : 'w-2 bg-white/40 hover:bg-white/70'

@@ -52,15 +52,18 @@ export default function ServiceImageGallery({ images, title, badge }) {
       if (e.cancelable) {
         e.preventDefault()
       }
-      const clampedDelta = Math.max(-120, Math.min(120, deltaX))
+      // 🔄 معکوس کردن جهت برای هماهنگی کامل حرکت کارت با انگشت
+      const invertedDelta = -deltaX
+      const clampedDelta = Math.max(-100, Math.min(100, invertedDelta))
       setTouchDeltaX(clampedDelta)
     }
   }
 
   const handleTouchEnd = () => {
     if (!hasMultipleImages) return
-    if (touchDeltaX < -40) nextSlide()
-    else if (touchDeltaX > 40) prevSlide()
+    // 🔄 اصلاح جهت سوایپ
+    if (touchDeltaX > 35) nextSlide()
+    else if (touchDeltaX < -35) prevSlide()
     else setTouchDeltaX(0)
 
     setTouchStartX(null)
@@ -76,8 +79,8 @@ export default function ServiceImageGallery({ images, title, badge }) {
         </span>
       )}
 
-      {/* کانتینر بیرونی اصلاح شده بدون py-4 و overflow-hidden اضافی */}
-      <div className="relative w-full max-w-[260px] sm:max-w-[310px] h-full flex items-center justify-center">
+      {/* کانتینر بیرونی */}
+      <div className="relative w-full max-w-[260px] sm:max-w-[310px] h-full flex items-center justify-center overflow-hidden">
         {/* کانتینر اصلی لمس کارت‌ها */}
         <div
           className="relative w-full max-w-[240px] sm:max-w-[280px] h-full"

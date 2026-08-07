@@ -18,12 +18,13 @@ export default function HomePage() {
       <div className="mx-auto pt-10 mb-20">
         <HeroSlider />
       </div>
-
-      {/* ۲. سکشن رزرو و تماس */}
-      <CallToAction />
       
       {/* ۳. سکشن ویژگی‌های کلینیک */}
       <FeaturesGrid />
+
+      
+      {/* ۲. سکشن رزرو و تماس */}
+      <CallToAction />
 
       {/* ۴. سکشن معرفی پزشک و آمار */}
       <AboutSection />

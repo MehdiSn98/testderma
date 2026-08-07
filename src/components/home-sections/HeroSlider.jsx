@@ -65,7 +65,7 @@ export default function HeroSlider() {
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6">
       <div
-        className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl overflow-hidden isolation-isolate shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
+        className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-3xl overflow-hidden isolation-isolate shadow-clinic-hero"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -80,29 +80,29 @@ export default function HeroSlider() {
             }`}
           >
             <div
-  className="absolute inset-[-3px] bg-cover bg-center bg-no-repeat scale-100 transition-transform duration-[7000ms] ease-linear"
-  style={{ backgroundImage: `url('${slide.image}')` }}
->
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1c120c]/90 via-[#1c120c]/60 to-[#1c120c]/25 md:bg-gradient-to-l md:from-[#1c120c]/25 md:via-[#1c120c]/70 md:to-[#1c120c]/90" />
+              className="absolute inset-[-3px] bg-cover bg-center bg-no-repeat scale-100 transition-transform duration-[7000ms] ease-linear"
+              style={{ backgroundImage: `url('${slide.image}')` }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-clinic-coffee-darkest/90 via-clinic-coffee-darkest/60 to-clinic-coffee-darkest/25 md:bg-gradient-to-l md:from-clinic-coffee-darkest/25 md:via-clinic-coffee-darkest/70 md:to-clinic-coffee-darkest/90" />
             </div>
 
             <div className="relative z-20 h-full p-6 pb-12 sm:p-10 sm:pb-16 md:p-12 md:pb-20 pr-8 sm:pr-14 md:pr-20 flex flex-col justify-end md:flex-col md:justify-center text-right">
               <div className="max-w-xl">
-                <span className="inline-block bg-[#ebdcc9]/90 text-[#3b271a] text-xs font-semibold px-3.5 py-1 rounded-full border border-[#dfd1b8] mb-3 backdrop-blur-md shadow-sm">
+                <span className="inline-block bg-clinic-cream-card/90 text-clinic-coffee-dark text-xs font-semibold px-3.5 py-1 rounded-full border border-clinic-border mb-3 backdrop-blur-md shadow-sm">
                   {slide.badge}
                 </span>
 
-                <h1 className="text-2xl sm:text-4xl font-bold text-[#faf6b0] leading-tight mb-3 drop-shadow-md">
+                <h1 className="text-2xl sm:text-4xl font-bold text-clinic-cream-light leading-tight mb-3 drop-shadow-md">
                   {slide.title}
                 </h1>
 
-                <p className="text-[#f3ece0] text-xs sm:text-sm md:text-base mb-6 leading-relaxed font-normal line-clamp-2 sm:line-clamp-3 drop-shadow">
+                <p className="text-clinic-cream-dark text-xs sm:text-sm md:text-base mb-6 leading-relaxed font-normal line-clamp-2 sm:line-clamp-3 drop-shadow">
                   {slide.description}
                 </p>
 
                 <Link
                   href={slide.link}
-                  className="inline-flex items-center justify-center gap-2 bg-[#3b271a] hover:bg-[#26180f] text-[#f7f3ed] font-medium text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-[#1c120c]/50 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 border border-[#dfd1b8]/20"
+                  className="inline-flex items-center justify-center gap-2 bg-clinic-coffee-dark hover:bg-clinic-coffee-deep text-clinic-cream-light font-medium text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-clinic-coffee-darkest/50 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 border border-clinic-border/20"
                 >
                   <span>توضیحات بیشتر</span>
 
@@ -128,7 +128,7 @@ export default function HeroSlider() {
         <button
           onClick={prevSlide}
           aria-label="اسلاید قبلی"
-          className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1c120c]/60 text-[#f7f3ed] hover:bg-[#3b271a] backdrop-blur-md border border-[#dfd1b8]/30 items-center justify-center transition-all hover:scale-105 active:scale-95"
+          className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-clinic-coffee-darkest/60 text-clinic-cream-light hover:bg-clinic-coffee-dark backdrop-blur-md border border-clinic-border/30 items-center justify-center transition-all hover:scale-105 active:scale-95"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -138,7 +138,7 @@ export default function HeroSlider() {
         <button
           onClick={nextSlide}
           aria-label="اسلاید بعدی"
-          className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-[#1c120c]/60 text-[#f7f3ed] hover:bg-[#3b271a] backdrop-blur-md border border-[#dfd1b8]/30 items-center justify-center transition-all hover:scale-105 active:scale-95"
+          className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-clinic-coffee-darkest/60 text-clinic-cream-light hover:bg-clinic-coffee-dark backdrop-blur-md border border-clinic-border/30 items-center justify-center transition-all hover:scale-105 active:scale-95"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -156,7 +156,7 @@ export default function HeroSlider() {
               aria-label={`برو به اسلاید ${index + 1}`}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentSlide
-                  ? 'w-6 bg-[#ebdcc9]'
+                  ? 'w-6 bg-clinic-cream-card'
                   : 'w-2 bg-white/40 hover:bg-white/70'
               }`}
             />

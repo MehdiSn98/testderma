@@ -2,9 +2,9 @@
 
 export default function MedicalBackground() {
   return (
-    <div className="absolute inset-0 top-0 left-0 right-0 bottom-0 w-full h-full -z-10 pointer-events-none select-none overflow-hidden bg-[#f8f4ed] m-0 p-0 border-0 outline-none">
+    <div className="absolute inset-0 top-0 left-0 right-0 bottom-0 w-full h-full -z-10 pointer-events-none select-none overflow-hidden bg-clinic-cream m-0 p-0 border-0 outline-none">
       
-      {/* هاله نوری بژ/عسلی خیلی ملایم در بالا-راست (کمی روشن‌تر از هدر) */}
+      {/* هاله نوری بژ/عسلی خیلی ملایم در بالا-راست */}
       <div 
         className="absolute -top-40 -right-20 w-[600px] h-[600px] sm:w-[900px] sm:h-[900px] rounded-full blur-[140px] opacity-70 pointer-events-none"
         style={{

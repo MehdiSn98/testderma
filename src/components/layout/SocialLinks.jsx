@@ -35,7 +35,7 @@ export default function SocialLinks() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={item.name}
-          className={`w-10 h-10 rounded-full bg-white/10 text-slate-200 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-white/10 backdrop-blur-md hover:scale-110 active:scale-95 ${item.hoverBg}`}
+          className={`w-10 h-10 rounded-full bg-white/10 text-clinic-cream-light hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-white/10 backdrop-blur-md hover:scale-110 active:scale-95 ${item.hoverBg}`}
         >
           <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
             {item.icon}

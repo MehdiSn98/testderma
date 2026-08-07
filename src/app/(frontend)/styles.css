@@ -3,6 +3,37 @@
 @import '@fontsource/vazirmatn/500.css';
 @import '@fontsource/vazirmatn/700.css';
 
+@theme {
+  /* پالت کرمی / بژ */
+  --color-clinic-cream: #f8f4ed;
+  --color-clinic-cream-light: #faf6f0;
+  --color-clinic-cream-dark: #eee4d5;
+  --color-clinic-cream-hover: #e4d4bd;
+  --color-clinic-cream-card: #dfc7a8;
+
+  /* پالت قهوه‌ای / شکلاتی */
+  --color-clinic-coffee-light: #8c7462;
+  --color-clinic-coffee: #4a3525;
+  --color-clinic-coffee-medium: #6b4a32;
+  --color-clinic-coffee-gradient: #5a3b26;
+  --color-clinic-coffee-dark: #3b271a;
+  --color-clinic-coffee-deep: #26180f;
+  --color-clinic-coffee-darkest: #1c120c;
+
+  /* مرزها و خطوط */
+  --color-clinic-border: #dfd1b8;
+  --color-clinic-cream-border: #e6d7c3;
+
+  /* رنگ‌های دکمه تماس و افکت‌ها */
+  --color-clinic-gold: #d8b58a;
+  --color-clinic-gold-light: #e8cda8;
+  --color-clinic-gold-soft: #eadbc5;
+
+  /* سایه‌های سفارشی */
+  --shadow-clinic-card: 0 10px 30px -5px rgba(59, 39, 26, 0.4), 0 4px 12px -2px rgba(59, 39, 26, 0.03);
+  --shadow-clinic-hero: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
 body {
   font-family: Vazirmatn, sans-serif;
 }

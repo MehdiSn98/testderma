@@ -52,19 +52,24 @@ export default function ServiceImageGallery({ images, title, badge }) {
       if (e.cancelable) {
         e.preventDefault()
       }
-      // 🔄 معکوس کردن جهت برای هماهنگی کامل حرکت کارت با انگشت
-      const invertedDelta = -deltaX
-      const clampedDelta = Math.max(-100, Math.min(100, invertedDelta))
+      // حرکت مستقیم کارت دقیقا هم‌جهت با انگشت (بدون منفی کردن)
+      const clampedDelta = Math.max(-100, Math.min(100, deltaX))
       setTouchDeltaX(clampedDelta)
     }
   }
 
   const handleTouchEnd = () => {
     if (!hasMultipleImages) return
-    // 🔄 اصلاح جهت سوایپ
-    if (touchDeltaX > 35) nextSlide()
-    else if (touchDeltaX < -35) prevSlide()
-    else setTouchDeltaX(0)
+    
+    // کشیدن از چپ به راست (deltaX مثبت) -> اسلاید بعدی
+    // کشیدن از راست به چپ (deltaX منفی) -> اسلاید قبلی
+    if (touchDeltaX > 35) {
+      nextSlide()
+    } else if (touchDeltaX < -35) {
+      prevSlide()
+    } else {
+      setTouchDeltaX(0)
+    }
 
     setTouchStartX(null)
     setTouchStartY(null)

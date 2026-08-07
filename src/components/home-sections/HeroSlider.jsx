@@ -70,61 +70,68 @@ export default function HeroSlider() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {servicesSlides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
-              index === currentSlide
-                ? 'opacity-100 z-10 pointer-events-auto'
-                : 'opacity-0 z-0 pointer-events-none'
-            }`}
-          >
+        {servicesSlides.map((slide, index) => {
+          // استخراج هوشمند اولین تصویر، چه به صورت single string باشه چه array (با اسم images یا image)
+          const rawImg = slide.images || slide.image
+          const bgImage = Array.isArray(rawImg) ? rawImg[0] : rawImg
+
+          return (
             <div
-              className="absolute inset-[-3px] bg-cover bg-center bg-no-repeat scale-100 transition-transform duration-[7000ms] ease-linear"
-              style={{ backgroundImage: `url('${slide.image}')` }}
+              key={slide.id}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
+                index === currentSlide
+                  ? 'opacity-100 z-10 pointer-events-auto'
+                  : 'opacity-0 z-0 pointer-events-none'
+              }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-clinic-coffee-darkest/90 via-clinic-coffee-darkest/60 to-clinic-coffee-darkest/25 md:bg-gradient-to-l md:from-clinic-coffee-darkest/25 md:via-clinic-coffee-darkest/70 md:to-clinic-coffee-darkest/90" />
-            </div>
+              <div
+                className="absolute inset-[-3px] bg-cover bg-center bg-no-repeat scale-100 transition-transform duration-[7000ms] ease-linear"
+                style={{ backgroundImage: `url('${bgImage}')` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-clinic-coffee-darkest/90 via-clinic-coffee-darkest/60 to-clinic-coffee-darkest/25 md:bg-gradient-to-l md:from-clinic-coffee-darkest/25 md:via-clinic-coffee-darkest/70 md:to-clinic-coffee-darkest/90" />
+              </div>
 
-            <div className="relative z-20 h-full p-6 pb-12 sm:p-10 sm:pb-16 md:p-12 md:pb-20 pr-8 sm:pr-14 md:pr-20 flex flex-col justify-end md:flex-col md:justify-center text-right">
-              <div className="max-w-xl">
-                <span className="inline-block bg-clinic-cream-card/90 text-clinic-coffee-dark text-xs font-semibold px-3.5 py-1 rounded-full border border-clinic-border mb-3 backdrop-blur-md shadow-sm">
-                  {slide.badge}
-                </span>
+              <div className="relative z-20 h-full p-6 pb-12 sm:p-10 sm:pb-16 md:p-12 md:pb-20 pr-8 sm:pr-14 md:pr-20 flex flex-col justify-end md:flex-col md:justify-center text-right">
+                <div className="max-w-xl">
+                  <span className="inline-block bg-clinic-cream-card/90 text-clinic-coffee-dark text-xs font-semibold px-3.5 py-1 rounded-full border border-clinic-border mb-3 backdrop-blur-md shadow-sm">
+                    {slide.badge}
+                  </span>
 
-                <h1 className="text-2xl sm:text-4xl font-bold text-clinic-cream-light leading-tight mb-3 drop-shadow-md">
-                  {slide.title}
-                </h1>
+                  <h1 className="text-2xl sm:text-4xl font-bold text-clinic-cream-light leading-tight mb-3 drop-shadow-md">
+                    {slide.title}
+                  </h1>
 
-                <p className="text-clinic-cream-dark text-xs sm:text-sm md:text-base mb-6 leading-relaxed font-normal line-clamp-2 sm:line-clamp-3 drop-shadow">
-                  {slide.description}
-                </p>
+                  <p className="text-clinic-cream-dark text-xs sm:text-sm md:text-base mb-6 leading-relaxed font-normal line-clamp-2 sm:line-clamp-3 drop-shadow">
+                    {slide.description}
+                  </p>
 
-                <Link
-                  href={slide.link}
-                  className="inline-flex items-center justify-center gap-2 bg-clinic-coffee-dark hover:bg-clinic-coffee-deep text-clinic-cream-light font-medium text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-clinic-coffee-darkest/50 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 border border-clinic-border/20"
-                >
-                  <span>توضیحات بیشتر</span>
-
-                  <svg
-                    className="w-4 h-4 rotate-180"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <Link
+                    href={slide.link}
+                    className="inline-flex items-center justify-center gap-2 bg-clinic-coffee-dark hover:bg-clinic-coffee-deep text-clinic-cream-light font-medium text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-clinic-coffee-darkest/50 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 border border-clinic-border/20"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </Link>
+                    <span>توضیحات بیشتر</span>
+
+                    <svg
+                      className="w-4 h-4 rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
 
+        {/* دکمه اسلاید قبلی */}
         <button
           onClick={prevSlide}
           aria-label="اسلاید قبلی"
@@ -135,6 +142,7 @@ export default function HeroSlider() {
           </svg>
         </button>
 
+        {/* دکمه اسلاید بعدی */}
         <button
           onClick={nextSlide}
           aria-label="اسلاید بعدی"
@@ -145,6 +153,7 @@ export default function HeroSlider() {
           </svg>
         </button>
 
+        {/* نقاط راهنما (Dots) */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
           {servicesSlides.map((_, index) => (
             <button

@@ -4,7 +4,8 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { features } from '@/data/features'
 
 export default function FeaturesGrid() {
-  const [featuresRef, isVisible] = useScrollReveal(0.15)
+  // کاهش threshold به 0.05 برای شروع سریع‌تر انیمیشن موقع اسکرول
+  const [featuresRef, isVisible] = useScrollReveal(0.05)
 
   return (
     <section
@@ -15,11 +16,12 @@ export default function FeaturesGrid() {
         {features.map((feature, index) => (
           <div
             key={feature.id}
-            style={{ transitionDelay: isVisible ? `${index * 100}ms` : '0ms' }}
-            className={`bg-clinic-cream-light rounded-2xl p-4 sm:p-6 border border-clinic-border/40 shadow-clinic-card hover:shadow-clinic-card-hover hover:-translate-y-1.5 transition-all duration-700 ease-out flex flex-col items-center text-center group transform-gpu ${
+            /* کاهش delay از 100ms به 50ms برای هماهنگی بیشتر کارت‌های 3 و 4 */
+            style={{ transitionDelay: isVisible ? `${index * 50}ms` : '0ms' }}
+            className={`bg-clinic-cream-light rounded-2xl p-4 sm:p-6 border border-clinic-border/40 shadow-clinic-card hover:shadow-clinic-card-hover hover:-translate-y-1.5 transition-all duration-500 ease-out flex flex-col items-center text-center group transform-gpu ${
               isVisible
                 ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-16 pointer-events-none'
+                : 'opacity-0 translate-y-12 pointer-events-none'
             }`}
           >
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-clinic-cream-card group-hover:bg-clinic-coffee-dark text-clinic-coffee-dark group-hover:text-clinic-cream-light flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 transition-colors duration-300 shadow-inner">
